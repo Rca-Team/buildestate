@@ -85,18 +85,13 @@ if (process.env.NODE_ENV === 'production') {
 
 const corsMiddleware = cors({
   origin: (origin, callback) => {
-    // Allow same-origin or non-browser requests (curl/postman/server-to-server)
+    // Allow same-origin, server-to-server, or any frontend client origin
     if (!origin) return callback(null, true);
-
-    if (uniqueAllowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
-      return callback(null, true);
-    }
-
-    return callback(null, false);
+    return callback(null, origin);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Github-Key', 'X-Firecrawl-Key', 'X-Nvidia-Key']
+  optionsSuccessStatus: 204,
 });
 
 app.use(corsMiddleware);
