@@ -68,8 +68,8 @@ const HeroSection: React.FC = () => {
           className="absolute left-[738px] bottom-22 w-64 h-64 bg-[rgba(254,215,170,0.2)] rounded-full blur-[32px]"
         />
 
-        <div className="max-w-[1280px] mx-auto px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Content */}
             <motion.div
               variants={containerVariants}
@@ -77,7 +77,7 @@ const HeroSection: React.FC = () => {
               animate="visible"
             >
               {/* Badge */}
-              <motion.div variants={itemVariants} className="inline-flex items-center gap-3 bg-[rgba(212,117,91,0.1)] border border-[rgba(212,117,91,0.2)] rounded-full px-4 py-2 mb-10">
+              <motion.div variants={itemVariants} className="inline-flex items-center gap-3 bg-[rgba(212,117,91,0.1)] border border-[rgba(212,117,91,0.2)] rounded-full px-4 py-2 mb-6 sm:mb-10">
                 <div className="w-2 h-2 bg-[#D4755B] rounded-full" />
                 <span className="font-manrope font-bold text-xs text-[#D4755B] uppercase tracking-wider">
                   AI-Powered Real Estate
@@ -85,14 +85,14 @@ const HeroSection: React.FC = () => {
               </motion.div>
 
               {/* Heading */}
-              <motion.h1 data-speakable variants={itemVariants} className="font-fraunces text-[56px] lg:text-[70px] leading-[1.1] text-[#111827] mb-8">
+              <motion.h1 data-speakable variants={itemVariants} className="font-fraunces text-4xl sm:text-5xl lg:text-[70px] leading-[1.15] lg:leading-[1.1] text-[#111827] mb-6 sm:mb-8">
                 Discover Your<br />
                 <span className="italic text-[#D4755B]">Dream Home</span> with<br />
                 AI Intelligence
               </motion.h1>
 
               {/* Description */}
-              <motion.p data-speakable variants={itemVariants} className="font-manrope font-light text-xl leading-7 text-[#4b5563] mb-12 max-w-[676px]">
+              <motion.p data-speakable variants={itemVariants} className="font-manrope font-light text-base sm:text-xl leading-relaxed text-[#4b5563] mb-8 sm:mb-12 max-w-[676px]">
                 Find flats, villas, and apartments in Mumbai, Delhi, Bangalore, Ahmedabad, and Pune.
                 RCA Estate uses AI-powered search and live market analysis to match you with the right property.
               </motion.p>

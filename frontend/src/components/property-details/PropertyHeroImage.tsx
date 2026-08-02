@@ -147,56 +147,44 @@ const PropertyHeroImage: React.FC<PropertyHeroImageProps> = ({ images = [], imag
     );
   }
 
-  // ── 2–4 images: hero left + vertical strip right ───────────────────────
-  if (imgs.length <= 4) {
-    return (
-      <>
-        <div className="flex gap-1 h-[62vh] min-h-[400px] bg-[#1C1B1A] overflow-hidden">
-          {/* Main */}
-          <div
-            className="relative flex-[2] overflow-hidden cursor-pointer group"
-            onClick={() => open(0)}
-          >
-            <img
-              src={imgs[0]}
-              alt={propertyName || 'Property'}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              style={{ outline: '1px solid rgba(0,0,0,0.08)', outlineOffset: '-1px' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-          </div>
-
-          {/* Thumbnails */}
-          <div className="flex-1 flex flex-col gap-1">
-            {imgs.slice(1).map((img, i) => (
-              <div
-                key={i}
-                className="relative flex-1 overflow-hidden cursor-pointer group"
-                onClick={() => open(i + 1)}
-              >
-                <img
-                  src={img}
-                  alt={`Photo ${i + 2}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                  style={{ outline: '1px solid rgba(0,0,0,0.07)', outlineOffset: '-1px' }}
-                />
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
-              </div>
-            ))}
-          </div>
-        </div>
-        <AnimatePresence>
-          {lightboxIndex !== null && <Lightbox images={imgs} startIndex={lightboxIndex} onClose={close} />}
-        </AnimatePresence>
-      </>
-    );
-  }
-
-  // ── 5+ images: Airbnb-style grid ─────────────────────────────────────────
+  // ── 2+ images: Mobile layout vs Desktop grid ───────────────────────────
   const gridImgs = imgs.slice(0, 5);
   return (
     <>
-      <div className="relative h-[60vh] min-h-[380px] bg-[#1C1B1A] overflow-hidden">
+      {/* Mobile Gallery Layout (< sm) */}
+      <div className="sm:hidden relative bg-[#1C1B1A]">
+        <div className="relative aspect-[4/3] w-full overflow-hidden cursor-pointer" onClick={() => open(0)}>
+          <img
+            src={imgs[0]}
+            alt={propertyName || 'Property'}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <button
+            onClick={(e) => { e.stopPropagation(); open(0); }}
+            className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-black/60 backdrop-blur-md text-white font-manrope font-semibold text-xs px-3 py-1.5 rounded-lg border border-white/20 shadow-sm"
+          >
+            <Images className="w-3.5 h-3.5" />
+            1 / {imgs.length}
+          </button>
+        </div>
+        {imgs.length > 1 && (
+          <div className="flex gap-2 p-2 overflow-x-auto no-scrollbar bg-[#11100F]">
+            {imgs.map((img, i) => (
+              <button
+                key={i}
+                onClick={() => open(i)}
+                className="relative w-16 h-12 flex-shrink-0 rounded-md overflow-hidden border border-white/10"
+              >
+                <img src={img} alt="" className="w-full h-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Desktop Gallery Layout (>= sm) */}
+      <div className="hidden sm:block relative h-[60vh] min-h-[380px] bg-[#1C1B1A] overflow-hidden">
         <div className="grid grid-cols-4 grid-rows-2 gap-1 h-full">
           {/* Hero — spans 2 cols × 2 rows */}
           <div

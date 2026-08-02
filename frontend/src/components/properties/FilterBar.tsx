@@ -142,10 +142,10 @@ const FilterBar: React.FC<FilterBarProps> = ({
 
   return (
     <div className="bg-white border-b border-[#E6E0DA] sticky top-[72px] z-20">
-      <div className="max-w-[1440px] mx-auto px-6 py-3">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 py-3">
 
         {/* ── Top row: search + filters + sort + view ── */}
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 sm:flex-wrap">
 
           {/* Location search */}
           <div className="relative flex-1 min-w-[200px] max-w-[280px]">

@@ -178,7 +178,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 text-[#374151] hover:text-[#D4755B] transition-[color]"
+          className="md:hidden p-2 text-[#374151] hover:text-[#D4755B] transition-[color] rounded-lg active:bg-black/5"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMobileMenuOpen}
@@ -189,56 +189,79 @@ const Navbar: React.FC = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-[#E6D5C3] shadow-lg py-4 px-8 flex flex-col gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`font-manrope text-base py-2.5 transition-[color] ${
-                isActive(link.path) ? 'text-[#D4755B] font-semibold' : 'text-[#374151]'
-              }`}
+      {/* Mobile Menu Backdrop & Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={closeMobileMenu}
-            >
-              {link.label}
-            </Link>
-          ))}
+              className="md:hidden fixed inset-0 top-[72px] bg-black/40 backdrop-blur-xs z-40"
+            />
 
-          <div className="border-t border-gray-100 mt-2 pt-3 flex flex-col gap-1">
-            {isAuthenticated && user ? (
-              <>
-                <p className="font-manrope text-xs text-[#9CA3AF] mb-1">
-                  Signed in as <span className="font-semibold text-[#374151]">{user.name}</span>
-                </p>
-                <Link to="/dashboard" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#D4755B] transition-[color]" onClick={closeMobileMenu}>Dashboard</Link>
-                <Link to="/my-listings" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#D4755B] transition-[color]" onClick={closeMobileMenu}>My Listings</Link>
+            {/* Slide Drawer */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="md:hidden absolute top-[72px] left-0 w-full bg-white border-b border-[#E6D5C3] shadow-xl py-5 px-6 flex flex-col gap-2 z-50 max-h-[calc(100vh-72px)] overflow-y-auto"
+            >
+              {navLinks.map((link) => (
                 <Link
-                  to="/add-property"
-                  className="mt-2 bg-[#D4755B] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
+                  key={link.path}
+                  to={link.path}
+                  className={`font-manrope text-base py-3 px-3 rounded-xl transition-all ${
+                    isActive(link.path)
+                      ? 'text-[#D4755B] bg-[rgba(212,117,91,0.08)] font-semibold'
+                      : 'text-[#374151] hover:bg-[#FAF8F4]'
+                  }`}
                   onClick={closeMobileMenu}
                 >
-                  + List Property
+                  {link.label}
                 </Link>
-                <button onClick={handleLogout} className="font-manrope text-base py-2.5 text-left text-[#374151] hover:text-red-500 transition-[color]">
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link to="/signin" className="font-manrope font-semibold text-base py-2.5 text-[#374151]" onClick={closeMobileMenu}>Sign In</Link>
-                <Link
-                  to="/signup"
-                  className="mt-2 bg-[#D4755B] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
-                  onClick={closeMobileMenu}
-                >
-                  Sign Up
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      )}
+              ))}
+
+              <div className="border-t border-gray-100 mt-2 pt-4 flex flex-col gap-2">
+                {isAuthenticated && user ? (
+                  <>
+                    <div className="px-3 py-1">
+                      <p className="font-manrope text-xs text-[#9CA3AF]">Signed in as</p>
+                      <p className="font-manrope font-semibold text-sm text-[#374151] truncate">{user.name}</p>
+                    </div>
+                    <Link to="/dashboard" className="font-manrope text-base py-2.5 px-3 rounded-xl text-[#374151] hover:bg-[#FAF8F4] transition-all" onClick={closeMobileMenu}>Dashboard</Link>
+                    <Link to="/my-listings" className="font-manrope text-base py-2.5 px-3 rounded-xl text-[#374151] hover:bg-[#FAF8F4] transition-all" onClick={closeMobileMenu}>My Listings</Link>
+                    <Link
+                      to="/add-property"
+                      className="mt-2 bg-[#D4755B] text-white font-manrope font-bold text-sm px-6 py-3.5 rounded-xl hover:bg-[#B86851] active:scale-[0.98] transition-all text-center shadow-sm"
+                      onClick={closeMobileMenu}
+                    >
+                      + List Property
+                    </Link>
+                    <button onClick={handleLogout} className="font-manrope text-base py-2.5 px-3 rounded-xl text-left text-red-600 hover:bg-red-50 transition-all mt-1">
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/signin" className="font-manrope font-semibold text-base py-3 px-3 rounded-xl text-[#374151] hover:bg-[#FAF8F4] text-center border border-[#E6E0DA]" onClick={closeMobileMenu}>Sign In</Link>
+                    <Link
+                      to="/signup"
+                      className="bg-[#D4755B] text-white font-manrope font-bold text-sm px-6 py-3.5 rounded-xl hover:bg-[#B86851] active:scale-[0.98] transition-all text-center shadow-sm"
+                      onClick={closeMobileMenu}
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </motion.nav>
     </>
   );
