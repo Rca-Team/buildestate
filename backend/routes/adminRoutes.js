@@ -26,6 +26,7 @@ import {
   getUserStats,
   getPropertyStats,
   getEnhancedOverview,
+} from '../controller/adminController.js';
 import { adminProtect } from '../middleware/authMiddleware.js';
 import { registry } from '../utils/circuitBreaker.js';
 
