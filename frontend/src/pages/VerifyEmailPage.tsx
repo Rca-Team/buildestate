@@ -29,8 +29,8 @@ const VerifyEmailPage: React.FC = () => {
           setMessage(data.message || 'Your email has been verified successfully!');
           // If backend returned a token, log the user in automatically
           if (data.token && data.user) {
-            localStorage.setItem('buildestate_token', data.token);
-            localStorage.setItem('buildestate_user', JSON.stringify(data.user));
+            localStorage.setItem('rcaestate_token', data.token);
+            localStorage.setItem('rcaestate_user', JSON.stringify(data.user));
             updateUser(data.user);
             setTimeout(() => navigate('/'), 3000);
           } else {

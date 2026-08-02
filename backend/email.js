@@ -10,7 +10,7 @@ const BRAND = {
   border: '#E6E0DA',
   text: '#374151',
   muted: '#6B7280',
-  site: process.env.WEBSITE_URL || 'https://buildestate.vercel.app',
+  site: process.env.WEBSITE_URL || 'https://rcaestate.vercel.app',
   year: new Date().getFullYear(),
 };
 
@@ -36,7 +36,7 @@ const wrap = (title, body, unsubscribeUrl = '') => `<!DOCTYPE html>
   <!-- Header -->
   <div style="background:${BRAND.dark};padding:32px 28px;text-align:center;">
     <h1 style="margin:0;font-size:22px;font-weight:700;color:#ffffff;letter-spacing:0.5px;">${escHtml(title)}</h1>
-    <p style="margin:8px 0 0;font-size:13px;color:rgba(255,255,255,0.7);">BuildEstate</p>
+    <p style="margin:8px 0 0;font-size:13px;color:rgba(255,255,255,0.7);">RCA.Estate</p>
   </div>
 
   <!-- Body -->
@@ -46,7 +46,7 @@ const wrap = (title, body, unsubscribeUrl = '') => `<!DOCTYPE html>
 
   <!-- Footer -->
   <div style="border-top:1px solid ${BRAND.border};padding:20px 28px;text-align:center;font-size:12px;color:${BRAND.muted};">
-    <p style="margin:0;">&copy; ${BRAND.year} BuildEstate. All rights reserved.</p>
+    <p style="margin:0;">&copy; ${BRAND.year} RCA.Estate. All rights reserved.</p>
     <p style="margin:8px 0 0;">
       <a href="${BRAND.site}" style="color:${BRAND.color};text-decoration:none;">Website</a>
       &nbsp;&middot;&nbsp;
@@ -191,14 +191,14 @@ export const getEmailVerificationTemplate = (name, verificationUrl) => wrap(
     <p style="margin:0;font-size:12px;color:${BRAND.muted};word-break:break-all;">Copy and paste this link into your browser:<br/><a href="${verificationUrl}" style="color:${BRAND.color};text-decoration:none;">${verificationUrl}</a></p>
   </div>
 
-  <p style="font-size:13px;color:${BRAND.muted};margin:16px 0 0;">If you didn't create an account with BuildEstate, you can safely ignore this email.</p>`
+  <p style="font-size:13px;color:${BRAND.muted};margin:16px 0 0;">If you didn't create an account with RCA.Estate, you can safely ignore this email.</p>`
 );
 
 // ─── 5. Password Reset ──────────────────────────────────
 
 export const getPasswordResetTemplate = (resetUrl) => wrap(
   'Reset Your Password',
-  `<p style="margin:0 0 20px;font-size:15px;">We received a request to reset your BuildEstate account password.</p>
+  `<p style="margin:0 0 20px;font-size:15px;">We received a request to reset your RCA.Estate account password.</p>
 
   <p style="margin:0 0 8px;font-size:14px;color:${BRAND.muted};">Click the button below to set a new password. This link expires in <strong>10 minutes</strong>.</p>
 
@@ -223,7 +223,7 @@ export const getListingApprovedTemplate = (propertyTitle, propertyId) => wrap(
   </div>
 
   <div style="background:#f0fdf4;border-left:3px solid #16a34a;padding:14px 16px;border-radius:6px;font-size:14px;color:#166534;margin-bottom:24px;">
-    Your listing is now visible to all buyers and renters on BuildEstate.
+    Your listing is now visible to all buyers and renters on RCA.Estate.
   </div>
 
   ${btn(BRAND.site + '/property/' + propertyId, 'View Your Listing')}
@@ -259,7 +259,7 @@ export const getUserSuspendedTemplate = (userName, days, reason, suspendedUntil)
   'Account Temporarily Suspended',
   `<p style="margin:0 0 20px;font-size:15px;">Hello ${escHtml(userName)},</p>
 
-  <p style="margin:0 0 20px;font-size:15px;">Your BuildEstate account has been temporarily suspended for ${escHtml(String(days))} day${days > 1 ? 's' : ''}. During this period, you will not be able to access your account or post new listings.</p>
+  <p style="margin:0 0 20px;font-size:15px;">Your RCA.Estate account has been temporarily suspended for ${escHtml(String(days))} day${days > 1 ? 's' : ''}. During this period, you will not be able to access your account or post new listings.</p>
 
   <div style="background:#ffffff;border:1px solid ${BRAND.border};border-radius:8px;padding:20px;margin-bottom:24px;">
     <table style="width:100%;border-collapse:collapse;">
@@ -289,7 +289,7 @@ export const getUserBannedTemplate = (userName, reason) => wrap(
   'Account Permanently Banned',
   `<p style="margin:0 0 20px;font-size:15px;">Hello ${escHtml(userName)},</p>
 
-  <p style="margin:0 0 20px;font-size:15px;">After careful review, your BuildEstate account has been permanently banned due to violations of our terms of service.</p>
+  <p style="margin:0 0 20px;font-size:15px;">After careful review, your RCA.Estate account has been permanently banned due to violations of our terms of service.</p>
 
   <div style="background:#ffffff;border:1px solid ${BRAND.border};border-radius:8px;padding:20px;margin-bottom:24px;">
     <table style="width:100%;border-collapse:collapse;">
@@ -302,7 +302,7 @@ export const getUserBannedTemplate = (userName, reason) => wrap(
 
   <div style="background:#fef2f2;border-left:3px solid #dc2626;padding:14px 16px;border-radius:6px;font-size:14px;color:#991b1b;margin-bottom:24px;">
     <strong>Account Impact:</strong><br>
-    • You can no longer access your BuildEstate account<br>
+    • You can no longer access your RCA.Estate account<br>
     • All your listings have been removed from the platform<br>
     • Creating new accounts is prohibited
   </div>
@@ -318,7 +318,7 @@ export const getUserReactivatedTemplate = (userName) => wrap(
   'Account Reactivated - Welcome Back!',
   `<p style="margin:0 0 20px;font-size:15px;">Hello ${escHtml(userName)},</p>
 
-  <p style="margin:0 0 20px;font-size:15px;">Great news! Your BuildEstate account has been reactivated and you now have full access to all platform features.</p>
+  <p style="margin:0 0 20px;font-size:15px;">Great news! Your RCA.Estate account has been reactivated and you now have full access to all platform features.</p>
 
   <div style="background:#ffffff;border:1px solid ${BRAND.border};border-radius:8px;padding:20px;margin-bottom:24px;">
     <table style="width:100%;border-collapse:collapse;">
@@ -335,11 +335,11 @@ export const getUserReactivatedTemplate = (userName) => wrap(
     • Access to all BuildEstate features
   </div>
 
-  <p style="margin:20px 0;font-size:15px;">We're glad to have you back! You can now log in and resume using BuildEstate.</p>
+  <p style="margin:20px 0;font-size:15px;">We're glad to have you back! You can now log in and resume using RCA.Estate.</p>
 
   ${btn(BRAND.site + '/login', 'Log In to Your Account')}
 
-  <p style="font-size:13px;color:${BRAND.muted};margin:0;">Thank you for being part of the BuildEstate community.</p>`
+  <p style="font-size:13px;color:${BRAND.muted};margin:0;">Thank you for being part of the RCA.Estate community.</p>`
 );
 
 // ─── 8. Meeting Link ──────────────────────────────────────

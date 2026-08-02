@@ -72,8 +72,8 @@ const Navbar: React.FC = () => {
       <div className="max-w-[1280px] mx-auto px-8 flex items-center justify-between h-20">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 shrink-0" onClick={closeMobileMenu}>
-          <img src="/logo.png" alt="BuildEstate" width="36" height="36" className="h-9 w-auto" />
-          <span className="font-fraunces text-2xl font-bold text-[#111827]">BuildEstate</span>
+          <img src="/RCA-Logo.png" alt="RCA.Estate" width="36" height="36" className="h-9 w-auto" />
+          <span className="font-fraunces text-2xl font-bold text-[#111827]">RCA.Estate</span>
         </Link>
 
         {/* Desktop nav links */}

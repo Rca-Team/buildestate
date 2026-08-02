@@ -1,5 +1,5 @@
 /**
- * Winston Structured Logger for BuildEstate Backend
+ * Winston Structured Logger for RCA.Estate Backend
  *
  * Features:
  * - Log levels: error, warn, info, http, debug

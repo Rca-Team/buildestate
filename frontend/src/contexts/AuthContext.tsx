@@ -34,8 +34,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setToken(storedToken);
         setUser(JSON.parse(storedUser));
       } catch {
-        localStorage.removeItem('buildestate_token');
-        localStorage.removeItem('buildestate_user');
+        localStorage.removeItem('rcaestate_token');
+        localStorage.removeItem('rcaestate_user');
       }
     }
     setIsLoading(false);

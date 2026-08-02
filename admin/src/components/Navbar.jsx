@@ -110,7 +110,7 @@ const Navbar = () => {
             </motion.div>
             <div>
               <span className="text-lg font-bold text-[#FAF8F4] tracking-tight">
-                BuildEstate
+                RCA.Estate
               </span>
               <div className="text-[10px] text-[#9CA3AF] font-medium uppercase tracking-widest leading-none">
                 Admin Panel

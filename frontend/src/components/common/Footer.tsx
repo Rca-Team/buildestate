@@ -19,8 +19,8 @@ const Footer: React.FC = () => {
           {/* Brand Column */}
           <div>
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <img src="/logo.png" alt="BuildEstate" loading="lazy" decoding="async" width="40" height="40" className="h-10 w-auto brightness-0 invert" />
-              <span className="font-fraunces text-2xl font-bold">BuildEstate</span>
+              <img src="/RCA-Logo.png" alt="RCA.Estate" loading="lazy" decoding="async" width="40" height="40" className="h-10 w-auto brightness-0 invert" />
+              <span className="font-fraunces text-2xl font-bold">RCA.Estate</span>
             </Link>
             <p className="font-manrope font-extralight text-[#9ca3af] text-sm leading-relaxed mb-6">
               AI-powered luxury real estate platform connecting you with your dream home through intelligent matching and personalized recommendations.

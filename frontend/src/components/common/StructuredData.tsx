@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-const SITE_URL = 'https://buildestate.vercel.app';
+const SITE_URL = 'https://rcaestate.vercel.app';
 
 interface StructuredDataProps {
   type: 'website' | 'organization' | 'property' | 'aiHub' | 'localBusiness' | 'breadcrumb' | 'faqPage' | 'howTo' | 'speakable';
