@@ -107,7 +107,7 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
                   <label className={LABEL}>Phone</label>
                   <input
                     type="tel" name="phone" value={form.phone} onChange={handleChange}
-                    placeholder="+91 98765 43210" className={INPUT} required
+                    placeholder="+91 94147 41664" className={INPUT} required
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-3">

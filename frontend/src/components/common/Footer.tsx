@@ -110,22 +110,22 @@ const Footer: React.FC = () => {
                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color] group">
                   <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#D4755B]" />
                   <span className="leading-relaxed">
-                    502, Devpath Building,<br />
-                    Near Torrent Lab,<br />
-                    Ashram Road, Ahmedabad
+                    Police Colony,<br />
+                    Vivek Vihar,<br />
+                    Delhi
                   </span>
                 </a>
               </li>
               <li>
-                <a href="tel:+919876543210" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
+                <a href="tel:+919414741664" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
                   <Phone className="w-5 h-5 flex-shrink-0 text-[#D4755B]" />
-                  <span>+91 98765 43210</span>
+                  <span>+91 94147 41664</span>
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@rcaestate.com" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
+                <a href="mailto:gauravraj10226@gmail.com" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
                   <Mail className="w-5 h-5 flex-shrink-0 text-[#D4755B]" />
-                  <span>hello@rcaestate.com</span>
+                  <span>gauravraj10226@gmail.com</span>
                 </a>
               </li>
             </ul>

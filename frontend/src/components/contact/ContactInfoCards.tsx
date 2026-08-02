@@ -16,9 +16,9 @@ const ContactInfoCards: React.FC = () => {
               Visit Our Office
             </h3>
             <p className="font-manrope font-extralight text-sm text-[#4B5563] leading-relaxed mb-3">
-              502, Devpath Building,<br />
-              Near Torrent Lab,<br />
-              Ashram Road, Ahmedabad
+              Police Colony,<br />
+              Vivek Vihar,<br />
+              Delhi
             </p>
             <a 
               href="https://maps.google.com" 
@@ -49,22 +49,22 @@ const ContactInfoCards: React.FC = () => {
             </h3>
             <div className="space-y-2">
               <a 
-                href="tel:+919876543210" 
+                href="tel:+919414741664" 
                 className="flex items-center gap-2 font-manrope font-extralight text-sm text-[#4B5563] hover:text-[#D4755B] transition-[color]"
               >
                 <span className="material-icons text-base">
                   call
                 </span>
-                <span>+91 98765 43210</span>
+                <span>+91 94147 41664</span>
               </a>
               <a 
-                href="mailto:hello@rcaestate.com" 
+                href="mailto:gauravraj10226@gmail.com" 
                 className="flex items-center gap-2 font-manrope font-extralight text-sm text-[#4B5563] hover:text-[#D4755B] transition-[color]"
               >
                 <span className="material-icons text-base">
                   email
                 </span>
-                <span>hello@rcaestate.com</span>
+                <span>gauravraj10226@gmail.com</span>
               </a>
             </div>
           </div>

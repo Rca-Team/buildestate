@@ -213,7 +213,7 @@ const PropertyForm = () => {
                   <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="tel" id="phone" name="phone" required
                     value={formData.phone} onChange={handleInputChange}
-                    placeholder="+91 98765 43210" className={cn(inputClass, 'pl-10')} />
+                    placeholder="+91 94147 41664" className={cn(inputClass, 'pl-10')} />
                 </div>
               </div>
               <div>

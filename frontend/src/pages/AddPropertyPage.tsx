@@ -361,7 +361,7 @@ const AddPropertyPage: React.FC = () => {
                   value={form.phone}
                   onChange={handleChange}
                   required
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 94147 41664"
                   className="w-full border border-[#E6E0DA] rounded-lg px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:ring-2 focus:ring-[#D4755B]/40 focus:border-[#D4755B]"
                 />
               </div>
