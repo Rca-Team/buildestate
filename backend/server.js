@@ -39,6 +39,69 @@ if (process.env.NODE_ENV === 'production') {
   app.set('trust proxy', 'loopback');
 }
 
+// CORS Configuration (mounted FIRST to handle preflight OPTIONS requests)
+const parseCsv = (value = '') =>
+  value
+    .split(',')
+    .map((v) => v.trim())
+    .filter(Boolean);
+
+const envOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.ADMIN_URL,
+  process.env.WEBSITE_URL,
+  ...parseCsv(process.env.LOCAL_URLS || ''),
+  ...parseCsv(process.env.EXTRA_ALLOWED_ORIGINS || ''),
+].filter(Boolean);
+
+const defaultDevOrigins = [
+  'http://localhost:4000',
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'http://localhost:3000',
+];
+
+const defaultProdOrigins = [
+  'https://rcaestate.vercel.app',
+  'https://buildestate.vercel.app',
+  'https://real-estate-website-admin.onrender.com',
+  'https://real-estate-website-admin-sage.vercel.app',
+];
+
+const allowedOrigins = [
+  ...defaultDevOrigins,
+  ...defaultProdOrigins,
+  ...envOrigins,
+];
+
+const uniqueAllowedOrigins = [...new Set(allowedOrigins)];
+if (process.env.NODE_ENV === 'production') {
+  logger.info('Server starting', {
+    environment: process.env.NODE_ENV,
+    port: process.env.PORT || 4000,
+    allowedOrigins: uniqueAllowedOrigins.length ? uniqueAllowedOrigins : ['<none-configured>'],
+  });
+}
+
+const corsMiddleware = cors({
+  origin: (origin, callback) => {
+    // Allow same-origin or non-browser requests (curl/postman/server-to-server)
+    if (!origin) return callback(null, true);
+
+    if (uniqueAllowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+
+    return callback(null, false);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Github-Key', 'X-Firecrawl-Key', 'X-Nvidia-Key']
+});
+
+app.use(corsMiddleware);
+app.options('*', corsMiddleware);
+
 // Enhanced rate limiting configuration
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -46,20 +109,17 @@ const limiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: 'Too many requests, please try again later.' },
-  // Skip rate limiting for successful requests in development
+  // Skip rate limiting for successful requests in development and preflight OPTIONS
   skip: (req, res) => {
-    // Skip for health checks and status endpoints
+    if (req.method === 'OPTIONS') return true;
     if (req.path === '/status' || req.path === '/' || req.path.startsWith('/health')) return true;
     return process.env.NODE_ENV === 'development' && res.statusCode < 400;
   },
-  // req.ip respects the trust-proxy setting; parsing X-Forwarded-For ourselves
-  // lets clients spoof fresh rate-limit buckets with a forged first entry
 });
 
 // Security middlewares
 app.use(limiter);
 app.use(helmet({
-  // Configure helmet for proxy environments
   contentSecurityPolicy: process.env.NODE_ENV === 'production' ? {
     directives: {
       defaultSrc: ["'self'"],
@@ -92,60 +152,6 @@ app.use(mongoSanitize({
       requestId: req.requestId,
     });
   }
-}));
-
-
-// CORS Configuration
-const parseCsv = (value = '') =>
-  value
-    .split(',')
-    .map((v) => v.trim())
-    .filter(Boolean);
-
-const envOrigins = [
-  process.env.FRONTEND_URL,
-  process.env.ADMIN_URL,
-  process.env.WEBSITE_URL,
-  ...parseCsv(process.env.LOCAL_URLS || ''),
-  ...parseCsv(process.env.EXTRA_ALLOWED_ORIGINS || ''),
-].filter(Boolean);
-
-const defaultProdOrigins = [
-  'https://rcaestate.vercel.app',
-  'https://buildestate.vercel.app',
-  'https://real-estate-website-admin.onrender.com',
-  'https://real-estate-website-admin-sage.vercel.app',
-];
-
-const allowedOrigins = [
-  ...(process.env.NODE_ENV === 'production' ? [] : defaultDevOrigins),
-  ...defaultProdOrigins,
-  ...envOrigins,
-];
-
-const uniqueAllowedOrigins = [...new Set(allowedOrigins)];
-if (process.env.NODE_ENV === 'production') {
-  logger.info('Server starting', {
-    environment: process.env.NODE_ENV,
-    port: process.env.PORT || 4000,
-    allowedOrigins: uniqueAllowedOrigins.length ? uniqueAllowedOrigins : ['<none-configured>'],
-  });
-}
-
-app.use(cors({
-  origin: (origin, callback) => {
-    // Allow same-origin or non-browser requests (curl/postman/server-to-server)
-    if (!origin) return callback(null, true);
-
-    if (uniqueAllowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
-      return callback(null, true);
-    }
-
-    return callback(null, false);
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Github-Key', 'X-Firecrawl-Key', 'X-Nvidia-Key']
 }));
 
 // Database connection
