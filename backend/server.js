@@ -83,19 +83,24 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const corsMiddleware = cors({
-  origin: (origin, callback) => {
-    // Allow same-origin, server-to-server, or any frontend client origin
-    if (!origin) return callback(null, true);
-    return callback(null, origin);
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
-  optionsSuccessStatus: 204,
-});
+// Fail-proof CORS & Preflight OPTIONS Middleware
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
+  res.setHeader('Access-Control-Allow-Headers', req.headers['access-control-request-headers'] || 'Content-Type, Authorization, X-Requested-With, X-Github-Key, X-Firecrawl-Key, X-Nvidia-Key');
+  res.setHeader('Access-Control-Max-Age', '86400');
 
-app.use(corsMiddleware);
-app.options('*', corsMiddleware);
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+  next();
+});
 
 // Enhanced rate limiting configuration
 const limiter = rateLimit({
