@@ -178,36 +178,33 @@ const register = async (req, res) => {
     // Hash password (cost 12 — ~250ms on modern hardware, well above brute-force threshold)
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // TEMP: Auto-verify users to bypass email confirmation during testing
-    // TODO: Re-enable email verification in production
     // Generate email verification token
-    // const verificationToken = crypto.randomBytes(32).toString("hex");
-    // const hashedVerificationToken = crypto.createHash("sha256").update(verificationToken).digest("hex");
+    const verificationToken = crypto.randomBytes(32).toString("hex");
+    const hashedVerificationToken = crypto.createHash("sha256").update(verificationToken).digest("hex");
 
-    // Create new user (email auto-verified for testing)
+    // Create new user (auto-verified for instant access + email sent)
     const newUser = new userModel({
       name,
       email,
       password: hashedPassword,
-      isEmailVerified: true,  // TEMP: Auto-verify instead of requiring email confirmation
-      emailVerificationToken: null,
-      verificationTokenExpiry: null
+      isEmailVerified: true,
+      emailVerificationToken: hashedVerificationToken,
+      verificationTokenExpiry: Date.now() + 24 * 60 * 60 * 1000
     });
     await newUser.save();
 
-    // TEMP: Skip verification email during testing
-    // TODO: Re-enable when email verification is restored
-    // try {
-    //   const verificationUrl = `${process.env.WEBSITE_URL}/verify-email/${verificationToken}`;
-    //   await emailService.sendEmailVerification(email, name, verificationUrl);
-    // } catch (emailError) {
-    //   console.error('Failed to send verification email:', emailError);
-    // }
+    // Send email confirmation link
+    try {
+      const siteUrl = process.env.WEBSITE_URL || 'https://rcaestate.vercel.app';
+      const verificationUrl = `${siteUrl}/verify-email/${verificationToken}`;
+      await emailService.sendEmailVerification(email, name, verificationUrl);
+    } catch (emailError) {
+      console.error('Failed to send verification email:', emailError.message);
+    }
 
-    // TEMP: Auto-login user instead of requiring email verification
     const token = await issueUserSession(res, newUser, false);
     return res.json({
-      message: "Registration successful! You can now log in.",
+      message: "Registration successful! A confirmation email has been sent to your inbox.",
       success: true,
       token,
       user: { name: newUser.name, email: newUser.email }

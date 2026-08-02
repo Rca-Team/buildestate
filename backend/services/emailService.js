@@ -24,7 +24,7 @@ import {
 
 class EmailService {
   constructor() {
-    this.fromAddress = process.env.EMAIL_USER || 'noreply@rcaestate.com';
+    this.fromAddress = process.env.EMAIL_USER || process.env.SENDER_EMAIL || 'gauravraj10226@gmail.com';
   }
 
   /**
