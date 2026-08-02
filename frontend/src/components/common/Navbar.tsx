@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 
 const navLinks = [
