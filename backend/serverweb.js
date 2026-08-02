@@ -122,11 +122,11 @@ export default function getStatusPage() {
 
     <!-- Footer -->
     <div class="ftr">
-      <p>&copy; ${new Date().getFullYear()} BuildEstate &nbsp;|&nbsp;
+      <p>&copy; ${new Date().getFullYear()} RCA Estate &nbsp;|&nbsp;
         <a href="/health">Health</a> &nbsp;|&nbsp;
         <a href="/status">Status</a> &nbsp;|&nbsp;
-        <a href="https://buildestate.vercel.app" target="_blank">Website</a> &nbsp;|&nbsp;
-        <a href="https://github.com/AAYUSH412/Real-Estate-Website" target="_blank">GitHub</a>
+        <a href="https://rcaestate.vercel.app" target="_blank">Website</a> &nbsp;|&nbsp;
+        <a href="https://www.presences.dev/" target="_blank">GitHub</a>
       </p>
       <p style="margin-top:8px;opacity:.6">Express.js &middot; MongoDB &middot; Last refresh: ${new Date().toLocaleString()}</p>
     </div>

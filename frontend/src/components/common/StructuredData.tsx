@@ -60,7 +60,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
       logo: `${SITE_URL}/RCA-Logo.png`,
       areaServed: AREA_SERVED,
       sameAs: [
-        'https://github.com/AAYUSH412/Real-Estate-Website',
+        'https://www.presences.dev/',
         'https://linkedin.com/in/AAYUSH412',
       ],
       contactPoint: {
@@ -86,7 +86,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
         addressCountry: 'IN',
       },
       sameAs: [
-        'https://github.com/AAYUSH412/Real-Estate-Website',
+        'https://www.presences.dev/',
         'https://linkedin.com/in/AAYUSH412',
       ],
     },
