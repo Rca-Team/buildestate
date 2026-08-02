@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 const SITE_URL = 'https://rcaestate.vercel.app';
 
 interface StructuredDataProps {
-  type: 'website' | 'organization' | 'property' | 'aiHub' | 'localBusiness' | 'breadcrumb' | 'faqPage' | 'howTo' | 'speakable';
+  type: 'website' | 'organization' | 'property' | 'localBusiness' | 'breadcrumb' | 'faqPage' | 'howTo' | 'speakable';
   data?: {
     // property listing
     title?: string;
@@ -111,21 +111,6 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
       }),
       ...(data?.beds && { numberOfRooms: data.beds }),
       ...(data?.baths && { numberOfBathroomsTotal: data.baths }),
-    },
-
-    aiHub: {
-      '@context': 'https://schema.org',
-      '@type': 'WebApplication',
-      name: 'AI Property Hub - RCA Estate',
-      applicationCategory: 'RealEstateApplication',
-      description: 'AI-powered real estate analytics, property search, and investment insights.',
-      url: `${SITE_URL}/ai-hub`,
-      offers: {
-        '@type': 'Offer',
-        price: '0',
-        priceCurrency: 'INR',
-        availability: 'https://schema.org/InStock',
-      },
     },
 
     breadcrumb: {
