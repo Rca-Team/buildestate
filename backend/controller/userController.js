@@ -178,35 +178,39 @@ const register = async (req, res) => {
     // Hash password (cost 12 — ~250ms on modern hardware, well above brute-force threshold)
     const hashedPassword = await bcrypt.hash(password, 12);
 
+    // TEMP: Auto-verify users to bypass email confirmation during testing
+    // TODO: Re-enable email verification in production
     // Generate email verification token
-    const verificationToken = crypto.randomBytes(32).toString("hex");
-    const hashedVerificationToken = crypto.createHash("sha256").update(verificationToken).digest("hex");
+    // const verificationToken = crypto.randomBytes(32).toString("hex");
+    // const hashedVerificationToken = crypto.createHash("sha256").update(verificationToken).digest("hex");
 
-    // Create new user (email NOT verified yet)
+    // Create new user (email auto-verified for testing)
     const newUser = new userModel({
       name,
       email,
       password: hashedPassword,
-      isEmailVerified: false,
-      emailVerificationToken: hashedVerificationToken,
-      verificationTokenExpiry: Date.now() + 24 * 60 * 60 * 1000 // 24 hours
+      isEmailVerified: true,  // TEMP: Auto-verify instead of requiring email confirmation
+      emailVerificationToken: null,
+      verificationTokenExpiry: null
     });
     await newUser.save();
 
-    // Send verification email (not welcome email)
-    try {
-      const verificationUrl = `${process.env.WEBSITE_URL}/verify-email/${verificationToken}`;
-      await emailService.sendEmailVerification(email, name, verificationUrl);
-    } catch (emailError) {
-      console.error('Failed to send verification email:', emailError);
-      // Don't fail the registration if email fails, but log it
-    }
+    // TEMP: Skip verification email during testing
+    // TODO: Re-enable when email verification is restored
+    // try {
+    //   const verificationUrl = `${process.env.WEBSITE_URL}/verify-email/${verificationToken}`;
+    //   await emailService.sendEmailVerification(email, name, verificationUrl);
+    // } catch (emailError) {
+    //   console.error('Failed to send verification email:', emailError);
+    // }
 
-    // DO NOT return token yet - user must verify email first
+    // TEMP: Auto-login user instead of requiring email verification
+    const token = await issueUserSession(res, newUser, false);
     return res.json({
-      message: "Registration successful! Please check your email to verify your account.",
+      message: "Registration successful! You can now log in.",
       success: true,
-      requiresVerification: true
+      token,
+      user: { name: newUser.name, email: newUser.email }
     });
   } catch (error) {
     // Handle race-condition duplicate inserts (two simultaneous requests)
