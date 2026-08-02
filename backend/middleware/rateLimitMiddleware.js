@@ -33,7 +33,7 @@ export const registrationLimiter = rateLimit({
  */
 export const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // Limit each IP to 10 login requests per windowMs
+  max: process.env.NODE_ENV === 'production' ? 50 : 100, // 50 attempts in production, 100 in dev
   message: {
     message: 'Too many login attempts from this IP. Please try again later.',
     success: false,
