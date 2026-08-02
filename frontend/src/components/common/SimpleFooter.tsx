@@ -5,10 +5,10 @@ const SimpleFooter: React.FC = () => {
     <footer className="bg-[#F2EFE9] border-t border-[#E6E0DA] py-8">
       <div className="max-w-[1280px] mx-auto px-8 text-center">
         {/* Logo */}
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-2 h-2 bg-[#D4755B] rounded-full" />
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <img src="/RCA-Logo.png" alt="RCA.Estate" width="24" height="24" className="h-6 w-auto" />
           <span className="font-manrope font-extralight text-sm text-[#1E293B] uppercase tracking-widest">
-            BuildEstate
+            RCA.Estate
           </span>
         </div>
 

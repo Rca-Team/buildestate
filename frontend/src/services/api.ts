@@ -179,7 +179,7 @@ export const aiAPI = {
     category?: string;
     model?: string;
   }) => {
-    const firecrawlKey = localStorage.getItem('buildestate_firecrawl_key');
+    const firecrawlKey = localStorage.getItem('rcaestate_firecrawl_key');
     return apiClient.post('/ai/search', data, {
       headers: {
         ...(firecrawlKey && { 'X-Firecrawl-Key': firecrawlKey }),
@@ -290,7 +290,7 @@ export const aiAPI = {
     apiClient.get('/ai/localities', { params: { city, ...(q && { q }) } }),
 
   locationTrends: (city: string, model?: string) => {
-    const firecrawlKey = localStorage.getItem('buildestate_firecrawl_key');
+    const firecrawlKey = localStorage.getItem('rcaestate_firecrawl_key');
     return apiClient.get(`/locations/${encodeURIComponent(city)}/trends`, {
       params: { ...(model && { model }) },
       headers: {
@@ -313,8 +313,8 @@ export const aiAPI = {
 export const apiKeyStorage = {
   getFirecrawlKey: ()            => localStorage.getItem('rcaestate_firecrawl_key') || '',
   setFirecrawlKey: (key: string) => localStorage.setItem('rcaestate_firecrawl_key', key),
-  hasKeys:         ()            => !!localStorage.getItem('buildestate_firecrawl_key'),
-  clear:           ()            => localStorage.removeItem('buildestate_firecrawl_key'),
+  hasKeys:         ()            => !!localStorage.getItem('rcaestate_firecrawl_key'),
+  clear:           ()            => localStorage.removeItem('rcaestate_firecrawl_key'),
 };
 
 // Contact Form

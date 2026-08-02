@@ -22,13 +22,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(localStorage.getItem('buildestate_token'));
+  const [token, setToken] = useState<string | null>(localStorage.getItem('rcaestate_token'));
   const [isLoading, setIsLoading] = useState(true);
 
   // On mount, check if token exists and is valid
   useEffect(() => {
-    const storedToken = localStorage.getItem('buildestate_token');
-    const storedUser = localStorage.getItem('buildestate_user');
+    const storedToken = localStorage.getItem('rcaestate_token');
+    const storedUser = localStorage.getItem('rcaestate_user');
     if (storedToken && storedUser) {
       try {
         setToken(storedToken);
@@ -44,8 +44,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = useCallback(async (email: string, password: string, rememberMe: boolean = false) => {
     const { data } = await userAPI.login({ email, password, rememberMe });
     if (data.success && data.token) {
-      localStorage.setItem('buildestate_token', data.token);
-      localStorage.setItem('buildestate_user', JSON.stringify(data.user));
+      localStorage.setItem('rcaestate_token', data.token);
+      localStorage.setItem('rcaestate_user', JSON.stringify(data.user));
       setToken(data.token);
       setUser(data.user);
     } else {
@@ -59,8 +59,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return { requiresVerification: true };
     }
     if (data.success && data.token) {
-      localStorage.setItem('buildestate_token', data.token);
-      localStorage.setItem('buildestate_user', JSON.stringify(data.user));
+      localStorage.setItem('rcaestate_token', data.token);
+      localStorage.setItem('rcaestate_user', JSON.stringify(data.user));
       setToken(data.token);
       setUser(data.user);
       return {};
@@ -71,8 +71,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = useCallback(() => {
     // Fire-and-forget — revokes the httpOnly refresh cookie server-side
     userAPI.logout().catch(() => {});
-    localStorage.removeItem('buildestate_token');
-    localStorage.removeItem('buildestate_user');
+    localStorage.removeItem('rcaestate_token');
+    localStorage.removeItem('rcaestate_user');
     setToken(null);
     setUser(null);
   }, []);
@@ -81,7 +81,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser((prev) => {
       if (!prev) return prev;
       const next = { ...prev, ...partial };
-      localStorage.setItem('buildestate_user', JSON.stringify(next));
+      localStorage.setItem('rcaestate_user', JSON.stringify(next));
       return next;
     });
   }, []);

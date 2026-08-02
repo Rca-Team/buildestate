@@ -80,7 +80,7 @@ const SignUpPage: React.FC = () => {
               Create Account
             </h1>
             <p className="font-manrope font-extralight text-sm text-[#4B5563]">
-              Join BuildEstate and find your dream home
+              Join RCA.Estate and find your dream home
             </p>
           </div>
 
