@@ -110,14 +110,16 @@ const envOrigins = [
   ...parseCsv(process.env.EXTRA_ALLOWED_ORIGINS || ''),
 ].filter(Boolean);
 
-const defaultDevOrigins = [
-  'http://localhost:4000',
-  'http://localhost:5173',
-  'http://localhost:5174',
+const defaultProdOrigins = [
+  'https://rcaestate.vercel.app',
+  'https://buildestate.vercel.app',
+  'https://real-estate-website-admin.onrender.com',
+  'https://real-estate-website-admin-sage.vercel.app',
 ];
 
 const allowedOrigins = [
   ...(process.env.NODE_ENV === 'production' ? [] : defaultDevOrigins),
+  ...defaultProdOrigins,
   ...envOrigins,
 ];
 
@@ -135,11 +137,11 @@ app.use(cors({
     // Allow same-origin or non-browser requests (curl/postman/server-to-server)
     if (!origin) return callback(null, true);
 
-    if (uniqueAllowedOrigins.includes(origin)) {
+    if (uniqueAllowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
       return callback(null, true);
     }
 
-    return callback(new Error(`CORS blocked for origin: ${origin}`));
+    return callback(null, false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
