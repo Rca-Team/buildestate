@@ -168,7 +168,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-[rgba(255,255,255,0.1)] pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-manrope font-extralight text-[#6b7280] text-sm text-center md:text-left">
-              © 2026 BuildEstate. All rights reserved. Powered by AI.
+              © 2026 RCA Estate. All rights reserved. Powered by AI.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">

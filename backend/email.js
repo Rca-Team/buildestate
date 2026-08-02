@@ -53,7 +53,7 @@ const wrap = (title, body, unsubscribeUrl = '') => `<!DOCTYPE html>
       <a href="${BRAND.site}/contact" style="color:${BRAND.color};text-decoration:none;">Contact Us</a>
       ${unsubscribeUrl ? `&nbsp;&middot;&nbsp;<a href="${unsubscribeUrl}" style="color:${BRAND.muted};text-decoration:none;">Unsubscribe</a>` : ''}
     </p>
-    <p style="margin:8px 0 0;font-size:11px;color:${BRAND.muted};">BuildEstate, India</p>
+    <p style="margin:8px 0 0;font-size:11px;color:${BRAND.muted};">RCA Estate, India</p>
   </div>
 </div>
 </body>
@@ -151,7 +151,7 @@ export const getNewsletterTemplate = (email, unsubscribeUrl = '') => wrap(
 // ─── 4. Welcome (Registration) ──────────────────────────
 
 export const getWelcomeTemplate = (name) => wrap(
-  'Welcome to BuildEstate',
+  'Welcome to RCA Estate',
   `<p style="margin:0 0 20px;font-size:15px;">Hello <strong style="color:${BRAND.color};">${escHtml(name)}</strong>,</p>
   <p style="margin:0 0 24px;font-size:15px;">Your account has been created successfully. Here's what you can do:</p>
 
@@ -174,7 +174,7 @@ export const getWelcomeTemplate = (name) => wrap(
 export const getEmailVerificationTemplate = (name, verificationUrl) => wrap(
   'Verify Your Email Address',
   `<p style="margin:0 0 20px;font-size:15px;">Hello <strong style="color:${BRAND.color};">${escHtml(name)}</strong>,</p>
-  <p style="margin:0 0 24px;font-size:15px;">Thanks for signing up with BuildEstate! To complete your registration and start exploring properties, please verify your email address.</p>
+  <p style="margin:0 0 24px;font-size:15px;">Thanks for signing up with RCA Estate! To complete your registration and start exploring properties, please verify your email address.</p>
 
   <div style="background:#ffffff;border:1px solid ${BRAND.border};border-radius:8px;padding:20px;margin-bottom:24px;text-align:center;">
     <p style="margin:0 0 16px;font-size:14px;color:${BRAND.muted};">Click the button below to verify your email. This link expires in <strong>24 hours</strong>.</p>
@@ -332,7 +332,7 @@ export const getUserReactivatedTemplate = (userName) => wrap(
     <strong>What's restored:</strong><br>
     • Full access to your account dashboard<br>
     • Ability to post and manage listings<br>
-    • Access to all BuildEstate features
+    • Access to all RCA Estate features
   </div>
 
   <p style="margin:20px 0;font-size:15px;">We're glad to have you back! You can now log in and resume using RCA.Estate.</p>

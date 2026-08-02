@@ -94,7 +94,7 @@ const HeroSection: React.FC = () => {
               {/* Description */}
               <motion.p data-speakable variants={itemVariants} className="font-manrope font-light text-xl leading-7 text-[#4b5563] mb-12 max-w-[676px]">
                 Find flats, villas, and apartments in Mumbai, Delhi, Bangalore, Ahmedabad, and Pune.
-                BuildEstate uses AI-powered search and live market analysis to match you with the right property.
+                RCA Estate uses AI-powered search and live market analysis to match you with the right property.
               </motion.p>
 
               {/* CTA Buttons */}
