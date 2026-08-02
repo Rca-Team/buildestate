@@ -1,18 +1,20 @@
 import React from 'react';
-import mapLocationImage from '../../images/Map:Location.jpg';
 
 const ContactMapSection: React.FC = () => {
   return (
     <section className="bg-[#F2EFE9] py-16">
       <div className="max-w-[1280px] mx-auto px-8">
-        <div className="relative aspect-[1280/400] rounded-2xl overflow-hidden border border-[#E6E0DA] bg-gray-100">
-          {/* Map Image */}
-          <img
-            src={mapLocationImage}
-            alt="Office location map"
+        <div className="relative aspect-[1280/400] rounded-2xl overflow-hidden border border-[#E6E0DA] bg-gradient-to-br from-blue-50 to-blue-100">
+          {/* Map Placeholder */}
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.2455847297217!2d72.83838232346033!3d19.08270418701522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9c5c5c5c5c5%3A0x5c5c5c5c5c5c5c5c!2sMumbai%2C%20India!5e0!3m2!1sen!2sin!4v1234567890"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
             loading="lazy"
-            decoding="async"
-            className="w-full h-full object-cover"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full h-full"
           />
           
           {/* Map Overlay Button */}
